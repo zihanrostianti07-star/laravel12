@@ -9,12 +9,16 @@ use Illuminate\Http\Request;
 
 class BukuController extends Controller
 {
-    public function index()
-    {
-        $buku = Buku::with('kategori')->orderBy('judul')->get();
-
-        return view('admin.data-buku', compact('buku'));
-    }
+    public function index(Request $request)
+{
+    $buku = Buku::with('kategori')
+        ->when($request->q, fn ($query, $cari) => $query->where('judul', 'like', "%{$cari}%"))
+        ->orderBy('judul')
+        ->paginate(10)
+        ->withQueryString();
+ 
+    return view('admin.data-buku', compact('buku'));
+}
 
     public function create()
     {

@@ -6,13 +6,29 @@
 @section('content')
   @include('admin._alert')
 
-  <div class="d-flex justify-content-end mb-3">
-    <a href="{{ route('admin.buku.create') }}" class="btn-custom btn-custom-primary">
-      <i class="bi bi-plus-lg"></i> Tambah Buku
-    </a>
-  </div>
+  <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+  <form action="{{ route('admin.buku.index') }}" method="GET" class="d-flex gap-2">
+    <input type="text" name="q" value="{{ request('q') }}"
+           class="form-control" placeholder="Cari judul buku...">
+    <button type="submit" class="btn-custom btn-custom-primary">
+      <i class="bi bi-search"></i> Cari
+    </button>
+  </form>
+ 
+  <a href="{{ route('admin.buku.create') }}" class="btn-custom btn-custom-primary">
+    <i class="bi bi-plus-lg"></i> Tambah Buku
+  </a>
+</div>
+
 
   <div class="table-card-custom">
+      </div>   <!-- penutup table-responsive -->
+ 
+    <div class="mt-3 d-flex justify-content-center">
+      {{ $buku->links() }}
+    </div>
+  </div>     <!-- penutup table-card-custom -->
+
     <div class="table-responsive">
       <table class="table-custom">
         <thead>
@@ -30,7 +46,7 @@
         <tbody>
           @forelse ($buku as $item)
             <tr>
-              <td>{{ $loop->iteration }}</td>
+              <td>{{ $buku->firstItem() + $loop->index }}</td>
               <td class="table-product-name">{{ $item->judul }}</td>
               <td>{{ $item->penulis }}</td>
               <td>{{ $item->kategori->nama_kategori }}</td>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\BukuController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,4 +15,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('buku', BukuController::class);
+    Route::resource('kategori', KategoriController::class)->except('show');
 });

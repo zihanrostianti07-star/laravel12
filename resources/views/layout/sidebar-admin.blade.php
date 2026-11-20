@@ -36,6 +36,17 @@
           </li>
         </ul>
 
+        <!-- data kategori -->
+        <ul class="sidebar-menu-list">
+          <li class="sidebar-menu-item">
+            <a href="{{ route('admin.kategori.index') }}"
+               class="sidebar-menu-link {{ request()->routeIs('admin.kategori.*') ? 'active' : '' }}"
+               id="menu-kategori" title="Data Kategori">
+              <i class="bi bi-tags"></i>
+              <span>Data Kategori</span>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
 
